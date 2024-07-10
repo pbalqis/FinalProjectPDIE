@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Announcement</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    {% load static %}
+    <style>
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            color: #333;
+            background: #f0f3fa;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #B6D0E2;
+            padding-top: 20px;
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('{% static "image/sidebar-4.jpg" %}') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2; /* Adjust the opacity as needed */
+            z-index: 1;
+        }
+
+        .sidebar > div {
+            position: relative;
+            z-index: 2; /* Adjust this to be higher than the pseudo-element */
+        }
+
+        .sidebar-logo img {
+            width: 150px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #5f589d;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 3; /* Adjust this to be higher than the pseudo-element */
+        }
+
+        .sidebar a:hover {
+            color: #fff;
+            background-color: #5f589d;
+        }
+
+        .sidebar a .icon {
+            margin-right: 10px;
+        }
+
+        /* Page Content */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .welcome-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #5f589d;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #5f589d;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: #5f589d;
+            outline: none;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            background-color: #5f589d;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #3f3b7d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <img src="{% static 'image/logotiram.png' %}" alt="Logo" class="logo">
+        </div>
+        <a href="{% url 'manage_leave' %}"><i class='bx bxs-calendar-check icon'></i>Manage Leave</a>
+        <a href="{% url 'hr_dashboard' %}"><i class='bx bxs-dashboard icon'></i>Manage Dashboard</a>
+        <a href="{% url 'manage_emp' %}"><i class='bx bxs-group icon'></i>Manage Staff</a>
+        <a href="{% url 'logout' %}"><i class='bx bx-log-out icon'></i>Logout</a>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <div class="form-container">
+            <h1>Add New Announcement</h1>
+            <form action="{% url 'add_dashboard' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="announcement_title">Title</label>
+                    <input type="text" id="announcement_title" name="announcement_title" required>
+                </div>
+                <div class="form-group">
+                    <label for="announcement_content">Content</label>
+                    <textarea id="announcement_content" name="announcement_content" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="announcement_date">Date</label>
+                    <input type="date" id="announcement_date" name="announcement_date" required>
+                </div>
+                <button type="submit" class="btn-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+

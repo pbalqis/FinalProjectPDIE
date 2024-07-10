@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f3fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: #5f589d;
+            margin-bottom: 20px;
+        }
+
+        .leave-details {
+            margin-bottom: 20px;
+        }
+
+        .leave-details p {
+            margin: 10px 0;
+        }
+
+        .action-buttons {
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons button:hover {
+            background-color: #5f589d;
+            color: #fff;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #5f589d;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leave Details</h1>
+
+        <div class="leave-details">
+            <p><strong>Employee Name:</strong> {{ leave.employee_ic.employee_name }}</p>
+            <p><strong>Leave Type:</strong> {{ leave.leavetype }}</p>
+            <p><strong>Start Date:</strong> {{ leave.startdate }}</p>
+            <p><strong>End Date:</strong> {{ leave.enddate }}</p>
+            <p><strong>Reason:</strong> {{ leave.reason }}</p>
+            <p><strong>Status:</strong> {{ leave.status }}</p>
+        </div>
+
+        <div class="action-buttons">
+            <form id="approveForm" action="{% url 'update_leave_status' leave.id 'Approved' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Approve</button>
+            </form>
+
+            <form id="rejectForm" action="{% url 'update_leave_status' leave.id 'Rejected' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Reject</button>
+            </form>
+        </div>
+
+        <a href="{% url 'manage_leave' %}" class="back-link">Back to Leave List</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const approveForm = document.getElementById('approveForm');
+            const rejectForm = document.getElementById('rejectForm');
+
+            approveForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                this.submit();
+            });
+
+            rejectForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                this.submit();
+            });
+        });
+    </script>
+</body>
+</html>

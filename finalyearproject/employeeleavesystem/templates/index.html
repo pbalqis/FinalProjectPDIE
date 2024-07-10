@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+    {% load static %}
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("{% static 'image/background2.png' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e6f0ff;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 480px; /* Add some margin from the top */
+        }
+
+        .login-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none; /* Remove underline from hyperlinks */
+        }
+
+        .login-button img {
+            width: 150px; /* Adjust image width */
+            height: 130px; /* Adjust image height */
+            border-radius: 5px; /* Optional: rounder corners for the images */
+            transition: transform 0.3s ease; /* Add transition effect for image */
+        }
+
+        .login-button img:hover {
+            transform: scale(1.1); /* Scale image up on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <!-- Use image links for login -->
+        <a href="{% url 'hr_login' %}" class="login-button">
+            <img src="{% static 'image/userlogin.png' %}" >
+        </a>
+        <a href="{% url 'emp_login' %}" class="login-button">
+            <img src="{% static 'image/employee2.png' %}" >
+        </a>
+    </div>
+</body>
+</html>
